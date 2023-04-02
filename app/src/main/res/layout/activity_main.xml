@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/humidityLvl"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="32dp"
+        android:textSize="20sp"
+        android:text="Pour lancer l'acquisition, cliquez sur Start">
+    </TextView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="2dp"
+        android:id="@+id/buttonStart"
+        android:text="Start"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/buttonStop"
+        android:text="Stop"/>
+    <ProgressBar
+        android:id="@+id/sensorBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@android:style/Widget.ProgressBar.Horizontal"/>
+</LinearLayout>
