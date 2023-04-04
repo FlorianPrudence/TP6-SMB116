@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
     <TextView
-        android:id="@+id/humidityLvl"
+        android:id="@+id/humidityText"
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:layout_height="32dp"
@@ -17,14 +17,18 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="2dp"
         android:id="@+id/buttonStart"
-        android:text="Start"/>
+        android:text="Start"
+        android:enabled="true"
+        android:onClick="startUpdater"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="10dp"
         android:id="@+id/buttonStop"
-        android:text="Stop"/>
+        android:text="Stop"
+        android:enabled="false"
+        android:onClick="stopUpdater"/>
     <ProgressBar
         android:id="@+id/sensorBar"
         android:layout_width="match_parent"
