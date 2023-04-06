@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="5dp"
         android:id="@+id/buttonStart"
         android:text="Start"
         android:enabled="true"
@@ -23,15 +23,51 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:id="@+id/buttonStop"
         android:text="Stop"
         android:enabled="false"
         android:onClick="stopUpdater"/>
     <ProgressBar
         android:id="@+id/sensorBar"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@android:style/Widget.ProgressBar.Horizontal"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/buttonEditUrl"
+        android:text="Éditer l'URL"
+        android:enabled="true"
+        android:onClick="toggleEditUrl"/>
+    <LinearLayout
+        android:id="@+id/editUrlLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="64dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_marginBottom="32dp"
+        android:weightSum="1"
+        android:visibility="invisible">
+        <EditText
+            android:id="@+id/urlEditText"
+            android:layout_width="0dp"
+            android:layout_weight="0.6"
+            android:layout_marginEnd="5dp"
+            android:inputType="textUri"
+            android:hint="URI du capteur"
+            android:layout_height="fill_parent"/>
+        <Button
+            android:id="@+id/buttonDoEditUrl"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.3"
+            android:layout_marginStart="5dp"
+            android:onClick="doEditUrl"
+            android:text="Valider"/>
+    </LinearLayout>
 </LinearLayout>

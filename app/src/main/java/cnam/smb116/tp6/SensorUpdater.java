@@ -2,8 +2,10 @@ package cnam.smb116.tp6;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -21,6 +23,11 @@ public class SensorUpdater implements Runnable {
         this.httpHumiditySensor = new HTTPHumiditySensor();
     }
 
+    public SensorUpdater(Context context, String url) {
+        this.context = context;
+        this.httpHumiditySensor = new HTTPHumiditySensor(url);
+    }
+
     public void start() {
         if(!running.get()) {
             worker = new Thread(this);
@@ -32,6 +39,7 @@ public class SensorUpdater implements Runnable {
         running.set(false);
     }
 
+    //
     public void run() {
         running.set(true);
         while(running.get()) {
@@ -43,6 +51,7 @@ public class SensorUpdater implements Runnable {
                 context.sendBroadcast(intent);
                 Thread.sleep(httpHumiditySensor.minimalPeriod());
             } catch (Exception e) {
+
             }
 
         }
