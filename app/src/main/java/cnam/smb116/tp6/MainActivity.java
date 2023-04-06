@@ -9,15 +9,12 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import cnam.smb116.tp6.Sensor.HTTPHumiditySensor;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,10 +23,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView humidityText;
     private BroadcastReceiver receiver;
     private Button startBtn, stopBtn;
-    private EditText editText;
-    private LinearLayout linearLayout;
+    private EditText editUrl;
+    private LinearLayout editUrlLayout;
     private float sensorData;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         stopBtn = (Button)findViewById(R.id.buttonStop);
         bar = (ProgressBar)findViewById(R.id.sensorBar);
         humidityText = (TextView)findViewById(R.id.humidityText);
-        editText = (EditText)findViewById(R.id.urlEditText);
-        linearLayout = (LinearLayout)findViewById(R.id.editUrlLayout);
+        editUrl = (EditText)findViewById(R.id.urlEditText);
+        editUrlLayout = (LinearLayout)findViewById(R.id.editUrlLayout);
 
         bar.setProgress(0);
         bar.setMax(100);
@@ -98,26 +94,26 @@ public class MainActivity extends AppCompatActivity {
     // Affiche ou masque les composants de l'IHM permettant de modifier l'URL du sensor
     public void toggleEditUrl(View view) {
         updater.stop();
-        if(linearLayout.getVisibility() == View.VISIBLE) {
-            linearLayout.setVisibility(View.INVISIBLE);
+        if(editUrlLayout.getVisibility() == View.VISIBLE) {
+            editUrlLayout.setVisibility(View.INVISIBLE);
             startBtn.setEnabled(true);
             stopBtn.setEnabled(false);
             return;
         }
-        if(linearLayout.getVisibility() == View.INVISIBLE) {
+        if(editUrlLayout.getVisibility() == View.INVISIBLE) {
             startBtn.setEnabled(false);
             stopBtn.setEnabled(false);
-            linearLayout.setVisibility(View.VISIBLE);
+            editUrlLayout.setVisibility(View.VISIBLE);
         }
     }
 
     // Récupère l'URL saisi dans l'IHM et l'enregistre dans les SharedPreferences
     public void doEditUrl(View view) {
-        String url = editText.getText().toString();
+        String url = editUrl.getText().toString();
         if(url.length() == 0)
             updater = new SensorUpdater(this);
         else {
-            updater = new SensorUpdater(this, editText.getText().toString());
+            updater = new SensorUpdater(this, editUrl.getText().toString());
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor sEdit = prefs.edit();
             sEdit.putString("sensorURL", url);

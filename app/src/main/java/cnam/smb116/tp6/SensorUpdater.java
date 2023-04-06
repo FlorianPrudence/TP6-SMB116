@@ -18,11 +18,13 @@ public class SensorUpdater implements Runnable {
     public static final String HUMIDITY_SENSOR_RECEIVED = "humidity_sensor_received";
     public static final String SENSOR_DATA = "sensorData";
     private final AtomicBoolean running = new AtomicBoolean(false);
+    // Constructeur utilisé lorsqu'aucune URL n'a été récupérée dans les SharedPreferences
     public SensorUpdater(Context context) {
         this.context = context;
         this.httpHumiditySensor = new HTTPHumiditySensor();
     }
 
+    // Constructeur utilisé lorsqu'une URL a été récupérée depuis l'IHM ou dans les SharedPreferences
     public SensorUpdater(Context context, String url) {
         this.context = context;
         this.httpHumiditySensor = new HTTPHumiditySensor(url);
@@ -39,7 +41,8 @@ public class SensorUpdater implements Runnable {
         running.set(false);
     }
 
-    //
+    // Le comportement du Thread : une boucle récupère les données du capteur puis attends avant de recommencer un cycle
+    // Les données récupérées sont transmises par un intent envoyés via la méthode sendBroadcast
     public void run() {
         running.set(true);
         while(running.get()) {
@@ -51,9 +54,7 @@ public class SensorUpdater implements Runnable {
                 context.sendBroadcast(intent);
                 Thread.sleep(httpHumiditySensor.minimalPeriod());
             } catch (Exception e) {
-
             }
-
         }
     }
 }
